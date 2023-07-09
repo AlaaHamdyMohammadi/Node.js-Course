@@ -2,8 +2,10 @@
 
 const fs = require('fs');
 const http = require('http');
-const path = require('path');
+// const path = require('path');
 const url = require('url');
+// dot = current location of this module
+const replaceTemplate =  require('./modules/replaceTemplate')
 
 ////////////////////////////////////
 //Files
