@@ -20,6 +20,7 @@ const writeFilePro = (file, data) => {
   });
 };
 
+//async/await return promise
 const getDogPic = async () =>{
     try{
     const data = await readFilePro(`${__dirname}/dog.txt`);
@@ -33,11 +34,37 @@ const getDogPic = async () =>{
     await writeFilePro('dog-img.txt', res.body.message);
     console.log('Rondom image save to file');
     }catch(err){
-        console.log(err);
+        // console.log(err);
+        //use throw in situations when async/await function need to return value 
+        throw(err); //this entire promise as rejected(must use catch block to handle this error)
     }
+    return '2: Reeeedy'
 }
-getDogPic();
 
+//using async/await to handle error
+(async() => {
+    try{
+      console.log('1: Will get dog pics!');
+      const test = await getDogPic(); //value of this promise = '2: Reeeedy'
+      console.log(test);
+      console.log('3: Done getting dog pics!');
+    }catch(err){
+        console.log('Errooooooooor');
+    }
+})();
+
+/*
+//using then to handle error
+console.log('1: Will get dog pics!');
+// const test = getDogPic();
+// console.log(test);
+getDogPic().then(test => { 
+    console.log(test)
+    console.log('3: Done getting dog pics!');
+}).catch(err =>{
+    console.log('Errooooooooor');
+});
+*/
 
 /*
 readFilePro(`${__dirname}/dog.txt`)
